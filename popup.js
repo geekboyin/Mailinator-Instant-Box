@@ -1,4 +1,7 @@
 (function($) {
+  /* Focus on search field when open popup */
+  $('#email-form input').focus();
+
   const HOUR_IN_SECONDS = 3600;
   const DAY_IN_SECONDS = 86400;
   const WEEK_IN_SECONDS = 604800;
@@ -101,7 +104,7 @@
     },
     data: {
       listInbox: '',
-      mail: 'mjeseller',
+      mail: '',
       isFetching: false
     },
     ready: function() {
