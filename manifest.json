@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Mailinator Box",
+  "description": "This extension helps you fetch Mailinator email quickly.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://mailinator.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "https://mailinator.com/*"
+  ]
+}

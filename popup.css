@@ -1,0 +1,102 @@
+* { padding: 0; margin: 0; box-sizing: border-box; }
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 100%;
+  min-width: 300px;
+  background-color: #f5f5f5;
+  line-height: 1.5;
+}
+
+#status {
+  /* avoid an excessively wide status text */
+  white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 400px;
+}
+
+#email-form {
+  padding: 30px 15px;
+  background-color: #1565C0;
+}
+
+#email-form input {
+  font-family: inherit;
+  background-color: rgba(255,255,255,.3);
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: .9em;
+  width: 100%;
+  border-radius: 3px;
+}
+
+#email-form input::-webkit-input-placeholder {
+   color: rgba(255,255,255,.8);
+}
+
+#email-form input:-moz-placeholder { /* Firefox 18- */
+   color: rgba(255,255,255,.8);
+}
+
+#email-form input::-moz-placeholder {  /* Firefox 19+ */
+   color: rgba(255,255,255,.8);
+}
+
+#email-form input:-ms-input-placeholder {
+   color: rgba(255,255,255,.8);
+}
+
+#email-form input:focus::-webkit-input-placeholder {
+   color: #aaa;
+}
+
+#email-form input:focus:-moz-placeholder { /* Firefox 18- */
+   color: #aaa;
+}
+
+#email-form input:focus::-moz-placeholder {  /* Firefox 19+ */
+   color: #aaa;
+}
+
+#email-form input:focus:-ms-input-placeholder {
+   color: #aaa;
+}
+
+#email-form input:focus {
+  background-color: white;
+}
+
+#inbox ul {
+  list-style: none;
+  padding: 1px 0;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.list-inbox li {
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  margin: 10px;
+  background-color: #fff;
+}
+
+.list-inbox li h3 {
+  font-weight: normal;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.list-inbox li h3 a {
+  text-decoration: none;
+  color: #2c2c2c;
+}
+
+.list-inbox li h3 a:hover {
+  color: #1565C0;
+}
+
+.list-inbox li time {
+  font-size: .8em;
+  color: #aaa;
+}
