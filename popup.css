@@ -2,8 +2,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 100%;
-  min-width: 300px;
-  background-color: #f5f5f5;
+  min-width: 380px;
   line-height: 1.5;
 }
 
@@ -22,7 +21,8 @@ body {
 
 #email-form input {
   font-family: inherit;
-  background-color: rgba(255,255,255,.3);
+  background-color: rgba(255,255,255,.2);
+  color: white;
   border: none;
   outline: none;
   padding: 10px;
@@ -65,38 +65,96 @@ body {
 
 #email-form input:focus {
   background-color: white;
+  color: black;
+}
+
+#email-form .input-group {
+  position: relative;
+}
+
+#email-form .spinner {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  position: absolute;
+  right: 11px;
+  top: 7px;
+}
+
+#email-form .double-bounce1, .double-bounce2 {
+  background-color: #fff;
 }
 
 #inbox ul {
   list-style: none;
   padding: 1px 0;
   max-height: 360px;
-  overflow: auto;
+  overflow-x: visible;
+  overflow-y: scroll;
 }
 
-.list-inbox li {
-  padding: 15px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.2);
-  margin: 10px;
+#inbox .notification {
+  padding: 20px;
+  text-align: center;
+  color: #A2A2A2;
+}
+
+.list-inbox .inbox-item  {
+  border-bottom: 1px solid #efefef;
   background-color: #fff;
 }
 
-.list-inbox li h3 {
+.list-inbox .inbox-item .inbox-header {
+  padding: 15px;
+}
+
+.list-inbox .inbox-item  h3 {
   font-weight: normal;
   font-size: 1em;
   margin-bottom: 5px;
 }
 
-.list-inbox li h3 a {
+.list-inbox .inbox-item  h3 a {
   text-decoration: none;
   color: #2c2c2c;
 }
 
-.list-inbox li h3 a:hover {
+.list-inbox .inbox-item  h3 a:hover {
   color: #1565C0;
 }
 
-.list-inbox li time {
+.list-inbox .inbox-item  time {
   font-size: .8em;
   color: #aaa;
+}
+
+.list-inbox .inbox-detail {
+  background: #f5f5f5;
+  padding: 15px;
+}
+
+.list-inbox .inbox-detail .detail-header table {
+  font-size: .8em;
+  width: 100%;
+}
+
+.list-inbox .inbox-detail .detail-header table td {
+  min-width: 70px;
+  vertical-align: top;
+}
+
+.list-inbox .inbox-detail .detail-body {
+  margin-top: 20px;
+  width: 100%;
+  overflow: hidden;
+  font-size: .9em;
+}
+
+.list-inbox .inbox-detail .detail-body > div {
+  width: 100% !important;
+}
+
+.list-inbox .inbox-detail .detail-body p {
+  margin-bottom: 15px;
+  line-height: 1.5 !important;
 }

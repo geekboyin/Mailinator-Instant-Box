@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Mailinator Box",
+  "name": "Mailinator Instant Box",
   "description": "This extension helps you fetch Mailinator email quickly.",
   "version": "1.0",
   "browser_action": {

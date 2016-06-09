@@ -8,6 +8,7 @@
   <head>
     <title>Mailinator Box</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/loader.css">
     <link rel="stylesheet" href="popup.css">
 
     <!--
@@ -19,26 +20,75 @@
   </head>
   <body id="app">
     <section id="email-form">
-      <input type="text" placeholder="Enter email and hit enter">
+      <div class="input-group">
+        <input v-model="mail" @keyup.enter="fetchInbox" type="text" placeholder="Check any email">
+        <div class="spinner" v-if="isFetching">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
     </section>
 
     <section id="inbox">
-      <list-inbox></list-inbox>
+      <p v-if="isEmpty" class="notification">
+        This inbox is currently empty
+      </p>
+      <list-inbox :collection="listInbox"></list-inbox>
     </section>
 
     <!-- List Inbox-->
     <template id="list-inbox-template">
       <ul class="list-inbox">
-        <inbox-item>
+        <inbox-item v-for="item in collection" :model="item">
       </ul>
     </template>
 
     <!-- Inbox Item -->
     <template id="inbox-item-template">
       <li class="inbox-item">
-        <h3 class="subject"><a href="#">Thank you for your payment!</a></h3>
-        <time>2 mins ago</time>
+        <div class="inbox-header">
+          <h3 class="subject"><a href="#" @click="fetchMail(model.id, $event)">{{ model.subject }}</a></h3>
+          <time>{{ humanTimeDiff }} ago</time>
+        </div>
+
+        <inbox-detail :detail="inboxDetail" v-if="isFetchSuccess"></inbox-detail>
       </li>
+    </template>
+    
+    <!-- Inbox Detail -->
+    <template id="inbox-detail-template">
+      <div class="inbox-detail">
+        <div class="detail-header">
+          <table>
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>To: </td>
+                <td>{{ detail.headers.to }}</td>
+              </tr>
+
+              <tr>
+                <td>From: </td>
+                <td>{{ detail.headers.from }}</td>
+              </tr>
+
+              <tr>
+                <td>Subject: </td>
+                <td>{{ detail.headers.subject }}</td>
+              </tr>
+
+              <tr>
+                <td>Received: </td>
+                <td>{{ detail.headers.date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="detail-body">
+          {{{ detail.parts[0].body }}}
+        </div>
+      </div>
     </template>
 
     <script src="js/lib/vue.min.js"></script>
