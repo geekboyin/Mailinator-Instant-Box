@@ -32,7 +32,7 @@
     </section>
 
     <section id="inbox">
-      <p v-if="isEmpty" :transition class="notification">
+      <p v-if="isEmpty" class="notification">
         This inbox is currently empty
       </p>
       <list-inbox :collection="listInbox"></list-inbox>
@@ -51,53 +51,56 @@
 
     <!-- Inbox Item -->
     <template id="inbox-item-template">
-      <li class="inbox-item" :transition="itemTransitionName">
+      <li class="inbox-item">
         <div class="inbox-header">
           <h3 class="subject"><a href="#" @click="fetchMail(model.id, $event)">{{ model.subject }}</a></h3>
           <time>{{ humanTimeDiff }} ago</time>
-        </div>
-        <inbox-detail :detail="inboxDetail" :show="showDetail"></inbox-detail>
+        </div><!-- end .inbox-header -->
+
+        <div class="spinner" v-if="showLoader">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div><!-- end .spinner -->
+
+        <div class="inbox-detail">
+          <button class="close-detail" @click="closeDetail" v-if="showButton" :transition="buttonTransitionName"><i class="fa fa-times"></i></button>
+          <div class="detail-wrapper" v-if="showDetail" :transition="detailTransitionName">
+            <div class="detail-header">
+              <table>
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <td>To: </td>
+                    <td>{{ detail.headers.to }}</td>
+                  </tr>
+
+                  <tr>
+                    <td>From: </td>
+                    <td>{{ detail.headers.from }}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Subject: </td>
+                    <td>{{ detail.headers.subject }}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Received: </td>
+                    <td>{{ detail.headers.date }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="detail-body">
+              {{{ detail.parts[0].body }}}
+            </div>
+          </div>
+        </div><!-- end .inbox-detail -->
       </li>
     </template>
 
     <!-- Inbox Detail -->
-    <template id="inbox-detail-template">
-      <div class="inbox-detail">
-        <button class="close-detail" @click="closeDetail" v-if="showButton" :transition="buttonTransitionName"><i class="fa fa-times"></i></button>
-        <div class="detail-wrapper" v-if="showDetail" :transition="detailTransitionName">
-          <div class="detail-header">
-            <table>
-              <thead></thead>
-              <tbody>
-                <tr>
-                  <td>To: </td>
-                  <td>{{ detail.headers.to }}</td>
-                </tr>
-
-                <tr>
-                  <td>From: </td>
-                  <td>{{ detail.headers.from }}</td>
-                </tr>
-
-                <tr>
-                  <td>Subject: </td>
-                  <td>{{ detail.headers.subject }}</td>
-                </tr>
-
-                <tr>
-                  <td>Received: </td>
-                  <td>{{ detail.headers.date }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="detail-body">
-            {{{ detail.parts[0].body }}}
-          </div>
-        </div>
-      </div>
-    </template>
 
     <script src="js/lib/vue.min.js"></script>
     <script src="js/lib/jquery.min.js"></script>

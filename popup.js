@@ -41,45 +41,18 @@
   /******************
    | COMPONENTS
    ******************/
-  var InboxDetail = Vue.extend({
-    template: '#inbox-detail-template',
-    props: ['detail', 'show'],
-    data: function() {
-      return {
-        showButton: false,
-        showDetail: false,
-        buttonTransitionName: "scale",
-        detailTransitionName: "fade"
-      }
-    },
-    computed: {
-      showDetail: function() {
-        return this.show ? true : false;
-      },
-      showButton: function() {
-        return this.show ? true : false;
-      }
-    },
-    methods: {
-      closeDetail: function() {
-        console.log(this.showButton);
-        var self = this;
-        self.show = false;
-      }
-    }
-  });
-
   var InboxItem = Vue.extend({
     template: '#inbox-item-template',
     props: ['model'],
-    components: {
-      'inbox-detail': InboxDetail
-    },
     data: function() {
       return {
-        inboxDetail: '',
+        detail: '',
         showDetail: false,
-        itemTransitionName: 'item-fade'
+        showButton: false,
+        showLoader: false,
+        itemTransitionName: 'item-fade',
+        buttonTransitionName: "scale",
+        detailTransitionName: "fade"
       }
     },
     computed: {
@@ -88,6 +61,7 @@
       }
     },
     methods: {
+      /* Fetch mail by id */
       fetchMail: function(msgid, event) {
         event.preventDefault();
         var self = this;
@@ -100,14 +74,29 @@
             msgid: msgid
           },
           beforeSend: function() {
+            // Show loader
+            self.showLoader = true;
           },
           success: function(response) {
-            self.inboxDetail = response.data;
+            // Binding data
+            self.detail = response.data;
+
+            // Show detail and close button
             self.showDetail = true;
+            self.showButton = true;
+
+            // Hide loader
+            self.showLoader = false;
           },
           complete: function() {
           }
         });
+      },
+      /* Close detail */
+      closeDetail: function() {
+        var self = this;
+        self.showButton = false;
+        self.showDetail = false;
       }
     }
   });
@@ -142,26 +131,28 @@
     methods: {
       fetchInbox: function(event) {
         var self = this;
-        var target = $(event.currentTarget);
-        $.ajax({
-          method: 'GET',
-          dataType: 'json',
-          url: 'https://mailinator.com/api/webinbox2',
-          data: {
-            public_to: self.mail
-          },
-          beforeSend: function() {
-            target.blur();
-            self.isFetching = true;
-          },
-          success: function(response) {
-            self.listInbox = response.public_msgs.reverse();
-          },
-          complete: function() {
-            target.focus();
-            self.isFetching = false;
-          }
-        })
+        if(self.mail != '') {
+          var target = $(event.currentTarget);
+          $.ajax({
+            method: 'GET',
+            dataType: 'json',
+            url: 'https://mailinator.com/api/webinbox2',
+            data: {
+              public_to: self.mail
+            },
+            beforeSend: function() {
+              target.blur();
+              self.isFetching = true;
+            },
+            success: function(response) {
+              self.listInbox = response.public_msgs.reverse();
+            },
+            complete: function() {
+              target.focus();
+              self.isFetching = false;
+            }
+          });
+        }
       }
     }
   });
