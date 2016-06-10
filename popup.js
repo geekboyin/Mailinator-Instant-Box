@@ -43,7 +43,22 @@
    ******************/
   var InboxDetail = Vue.extend({
     template: '#inbox-detail-template',
-    props: ['detail']
+    props: ['detail'],
+    data: function() {
+      return {
+        showButton: true,
+        showDetail: true
+      }
+    },
+    methods: {
+      closeDetail: function() {
+        var self = this;
+        self.showButton = false;
+        setTimeout(function() {
+          self.showDetail = false;
+        }, 1000);
+      }
+    }
   });
 
   var InboxItem = Vue.extend({
@@ -55,7 +70,7 @@
     data: function() {
       return {
         inboxDetail: '',
-        isFetchSuccess: false
+        showDetail: false
       }
     },
     computed: {
@@ -79,7 +94,7 @@
           },
           success: function(response) {
             self.inboxDetail = response.data;
-            self.isFetchSuccess = true;
+            self.showDetail = true;
           },
           complete: function() {
           }
@@ -104,7 +119,7 @@
     },
     data: {
       listInbox: '',
-      mail: '',
+      mail: 'mjebuyer',
       isFetching: false
     },
     ready: function() {

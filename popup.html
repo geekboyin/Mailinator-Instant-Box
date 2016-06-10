@@ -9,6 +9,7 @@
     <title>Mailinator Box</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="popup.css">
 
     <!--
@@ -21,6 +22,7 @@
   <body id="app">
     <section id="email-form">
       <div class="input-group">
+        <i class="input-icon fa fa-envelope-o"></i>
         <input v-model="mail" @keyup.enter="fetchInbox" type="text" placeholder="Check any email">
         <div class="spinner" v-if="isFetching">
           <div class="double-bounce1"></div>
@@ -34,6 +36,10 @@
         This inbox is currently empty
       </p>
       <list-inbox :collection="listInbox"></list-inbox>
+    </section>
+
+    <section id="footer">
+      <p>Make with <i class="fa fa-heart-o"></i> by <a href="http://tatthien.com">Thien Nguyen</a></p>
     </section>
 
     <!-- List Inbox-->
@@ -50,14 +56,14 @@
           <h3 class="subject"><a href="#" @click="fetchMail(model.id, $event)">{{ model.subject }}</a></h3>
           <time>{{ humanTimeDiff }} ago</time>
         </div>
-
-        <inbox-detail :detail="inboxDetail" v-if="isFetchSuccess"></inbox-detail>
+        <inbox-detail :detail="inboxDetail" v-if="showDetail"></inbox-detail>
       </li>
     </template>
-    
+
     <!-- Inbox Detail -->
     <template id="inbox-detail-template">
-      <div class="inbox-detail">
+      <div class="inbox-detail" v-if="showDetail">
+        <button class="close-detail" @click="closeDetail" v-if="showButton"><i class="fa fa-times"></i></button>
         <div class="detail-header">
           <table>
             <thead></thead>
