@@ -100,7 +100,7 @@ body {
   padding: 1px 0;
   max-height: 400px;
   overflow-x: visible;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #inbox .notification {
