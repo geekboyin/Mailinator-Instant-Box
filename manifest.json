@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Mailinator Instant Box",
-  "description": "This extension helps you fetch Mailinator email quickly.",
+  "description": "This extension helps you quickly view the inbox of Mailinator public email.",
   "version": "1.0",
   "icons": {
     "48": "images/icon48.png"
