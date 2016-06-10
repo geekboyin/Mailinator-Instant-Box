@@ -56,43 +56,45 @@
           <h3 class="subject"><a href="#" @click="fetchMail(model.id, $event)">{{ model.subject }}</a></h3>
           <time>{{ humanTimeDiff }} ago</time>
         </div>
-        <inbox-detail :detail="inboxDetail" v-if="showDetail"></inbox-detail>
+        <inbox-detail :detail="inboxDetail" :show="showDetail"></inbox-detail>
       </li>
     </template>
 
     <!-- Inbox Detail -->
     <template id="inbox-detail-template">
-      <div class="inbox-detail" v-if="showDetail">
-        <button class="close-detail" @click="closeDetail" v-if="showButton"><i class="fa fa-times"></i></button>
-        <div class="detail-header">
-          <table>
-            <thead></thead>
-            <tbody>
-              <tr>
-                <td>To: </td>
-                <td>{{ detail.headers.to }}</td>
-              </tr>
+      <div class="inbox-detail">
+        <button class="close-detail" @click="closeDetail" v-if="showButton" :transition="buttonTransitionName"><i class="fa fa-times"></i></button>
+        <div class="detail-wrapper" v-if="showDetail" :transition="detailTransitionName">
+          <div class="detail-header">
+            <table>
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td>To: </td>
+                  <td>{{ detail.headers.to }}</td>
+                </tr>
 
-              <tr>
-                <td>From: </td>
-                <td>{{ detail.headers.from }}</td>
-              </tr>
+                <tr>
+                  <td>From: </td>
+                  <td>{{ detail.headers.from }}</td>
+                </tr>
 
-              <tr>
-                <td>Subject: </td>
-                <td>{{ detail.headers.subject }}</td>
-              </tr>
+                <tr>
+                  <td>Subject: </td>
+                  <td>{{ detail.headers.subject }}</td>
+                </tr>
 
-              <tr>
-                <td>Received: </td>
-                <td>{{ detail.headers.date }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                <tr>
+                  <td>Received: </td>
+                  <td>{{ detail.headers.date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <div class="detail-body">
-          {{{ detail.parts[0].body }}}
+          <div class="detail-body">
+            {{{ detail.parts[0].body }}}
+          </div>
         </div>
       </div>
     </template>

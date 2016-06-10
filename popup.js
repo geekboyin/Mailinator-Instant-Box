@@ -43,20 +43,28 @@
    ******************/
   var InboxDetail = Vue.extend({
     template: '#inbox-detail-template',
-    props: ['detail'],
+    props: ['detail', 'show'],
     data: function() {
       return {
-        showButton: true,
-        showDetail: true
+        showButton: false,
+        showDetail: false,
+        buttonTransitionName: "scale",
+        detailTransitionName: "fade"
+      }
+    },
+    computed: {
+      showDetail: function() {
+        return this.show ? true : false;
+      },
+      showButton: function() {
+        return this.show ? true : false;
       }
     },
     methods: {
       closeDetail: function() {
+        console.log(this.showButton);
         var self = this;
-        self.showButton = false;
-        setTimeout(function() {
-          self.showDetail = false;
-        }, 1000);
+        self.show = false;
       }
     }
   });
@@ -119,7 +127,7 @@
     },
     data: {
       listInbox: '',
-      mail: 'mjebuyer',
+      mail: '',
       isFetching: false
     },
     ready: function() {
