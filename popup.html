@@ -32,7 +32,7 @@
     </section>
 
     <section id="inbox">
-      <p v-if="isEmpty" class="notification">
+      <p v-if="isEmpty" :transition class="notification">
         This inbox is currently empty
       </p>
       <list-inbox :collection="listInbox"></list-inbox>
