@@ -4,8 +4,11 @@
   "name": "Mailinator Instant Box",
   "description": "This extension helps you fetch Mailinator email quickly.",
   "version": "1.0",
+  "icons": {
+    "48": "images/icon48.png"
+  },
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "images/icon.png",
     "default_popup": "popup.html"
   },
   "content_security_policy": "script-src 'self' https://mailinator.com; object-src 'self'",
