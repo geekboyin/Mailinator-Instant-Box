@@ -78,7 +78,8 @@
     data: function() {
       return {
         inboxDetail: '',
-        showDetail: false
+        showDetail: false,
+        itemTransitionName: 'item-fade'
       }
     },
     computed: {

@@ -51,7 +51,7 @@
 
     <!-- Inbox Item -->
     <template id="inbox-item-template">
-      <li class="inbox-item">
+      <li class="inbox-item" :transition="itemTransitionName">
         <div class="inbox-header">
           <h3 class="subject"><a href="#" @click="fetchMail(model.id, $event)">{{ model.subject }}</a></h3>
           <time>{{ humanTimeDiff }} ago</time>
