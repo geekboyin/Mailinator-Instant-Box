@@ -11,9 +11,9 @@
     "default_icon": "images/icon.png",
     "default_popup": "popup.html"
   },
-  "content_security_policy": "script-src 'self' https://mailinator.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://www.mailinator.com; object-src 'self'",
   "permissions": [
     "activeTab",
-    "https://mailinator.com/*"
+    "https://www.mailinator.com/*"
   ]
 }
