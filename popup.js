@@ -68,10 +68,11 @@
         var target = $(event.currentTarget);
         $.ajax({
           method: 'GET',
-          dataType: 'jsonp',
-          url: 'https://mailinator.com/fetchmail?zone=public',
+          dataType: 'json',
+          url: 'https://www.mailinator.com/fetch_email',
           data: {
-            msgid: msgid
+            msgid: msgid,
+            zone: 'public'
           },
           beforeSend: function() {
             // Show loader
@@ -130,22 +131,25 @@
     },
     methods: {
       fetchInbox: function(event) {
+        console.log(self);
         var self = this;
         if(self.mail != '') {
           var target = $(event.currentTarget);
           $.ajax({
             method: 'GET',
             dataType: 'json',
-            url: 'https://mailinator.com/api/webinbox2',
+            url: 'https://www.mailinator.com/fetch_inbox',
             data: {
-              public_to: self.mail
+              x: 0,
+              to: self.mail,
+              zone: 'public'
             },
             beforeSend: function() {
               target.blur();
               self.isFetching = true;
             },
             success: function(response) {
-              self.listInbox = response.public_msgs.reverse();
+              self.listInbox = response.messages.reverse();
             },
             complete: function() {
               target.focus();
